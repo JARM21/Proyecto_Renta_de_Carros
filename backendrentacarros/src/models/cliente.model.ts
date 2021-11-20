@@ -53,7 +53,7 @@ export class Cliente extends Entity {
   clave: string;
 
   @hasMany(() => Solicitud)
-  solicitudes: Solicitud[]; //si algo le quito la e a la solicitudes en azul
+  solicitudes: Solicitud[]; //si algo le quito la e a la solicitudes en azu
 
   constructor(data?: Partial<Cliente>) {
     super(data);
