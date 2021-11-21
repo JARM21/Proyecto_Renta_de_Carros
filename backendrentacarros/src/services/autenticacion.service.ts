@@ -10,11 +10,11 @@ const jwt = require("jsonwebtoken")
 export class AutenticacionService {
   constructor(
     @repository(AdministradorRepository)
-    public AdministradorRepository: AdministradorRepository,
+    public administradorRepository: AdministradorRepository,
     @repository(AsesorRepository)
-    public AsesorRepository: AsesorRepository,
+    public asesorRepository: AsesorRepository,
     @repository(ClienteRepository)
-    public ClienteRepository: ClienteRepository
+    public clienteRepository: ClienteRepository
   ) {}
 
   /*
@@ -25,13 +25,13 @@ export class AutenticacionService {
     try {
       switch(tipo) {
         case "admin":
-          user = this.AdministradorRepository.findOne({where: {correo: usuario, clave : clave}});
+          user = this.administradorRepository.findOne({where: {correo: usuario, clave : clave}});
           break;
         case "asesor":
-          user = this.AsesorRepository.findOne({where: {correo: usuario, clave : clave}});
+          user = this.asesorRepository.findOne({where: {correo: usuario, clave : clave}});
           break;
         case "cliente":
-          user = this.ClienteRepository.findOne({where: {correo: usuario, clave : clave}});
+          user = this.clienteRepository.findOne({where: {correo: usuario, clave : clave}});
           break;
       }
       if(user) {
