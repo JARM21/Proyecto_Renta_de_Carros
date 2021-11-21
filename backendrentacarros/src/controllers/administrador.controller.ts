@@ -1,3 +1,4 @@
+import { service } from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -16,15 +17,43 @@ import {
   del,
   requestBody,
   response,
+  HttpErrors,
 } from '@loopback/rest';
-import {Administrador} from '../models';
+import {Administrador, Credenciales} from '../models';
 import {AdministradorRepository} from '../repositories';
+import { AutenticacionService } from '../services';
 
 export class AdministradorController {
   constructor(
     @repository(AdministradorRepository)
     public administradorRepository : AdministradorRepository,
+    @service(AutenticacionService)
+    public authenticationService : AutenticacionService
   ) {}
+
+  @post('/administradors/identificar')
+  @response(200, {
+    description: 'Identificacion de administrador'
+  })
+  async identificar(
+    @requestBody() credenciales : Credenciales
+  ) {
+    let admin = await this.authenticationService.IdentificarUsuario(credenciales.usuario, credenciales.clave, "admin");
+    if(admin) {
+     let token = this.authenticationService.GenerarToken(admin);
+     return {
+       datos: {
+         id: admin.id,
+         nombres: admin.nombres,
+         correo: admin.correo,
+         tipo: "admin"
+       },
+       token: token
+     }
+    } else {
+      throw new HttpErrors[401]("Datos invalidos");
+    }
+  }
 
   @post('/administradors')
   @response(200, {

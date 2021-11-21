@@ -1,3 +1,4 @@
+import { service } from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -16,15 +17,43 @@ import {
   del,
   requestBody,
   response,
+  HttpErrors,
 } from '@loopback/rest';
-import {Cliente} from '../models';
+import {Cliente, Credenciales} from '../models';
 import {ClienteRepository} from '../repositories';
+import { AutenticacionService } from '../services';
 
 export class ClienteController {
   constructor(
     @repository(ClienteRepository)
     public clienteRepository : ClienteRepository,
+    @service(AutenticacionService)
+    public authenticationService : AutenticacionService
   ) {}
+
+  @post('/clientes/identificar')
+  @response(200, {
+    description: 'Identificacion de administrador'
+  })
+  async identificar(
+    @requestBody() credenciales : Credenciales
+  ) {
+    let cliente = await this.authenticationService.IdentificarUsuario(credenciales.usuario, credenciales.clave, "cliente");
+    if(cliente) {
+     let token = this.authenticationService.GenerarToken(cliente);
+     return {
+       datos: {
+         id: cliente.id,
+         nombres: cliente.nombres,
+         correo: cliente.correo,
+         tipo: "cliente"
+       },
+       token: token
+     }
+    } else {
+      throw new HttpErrors[401]("Datos invalidos");
+    }
+  }
 
   @post('/clientes')
   @response(200, {
