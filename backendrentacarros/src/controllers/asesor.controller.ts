@@ -44,7 +44,11 @@ export class AsesorController {
     })
     asesor: Omit<Asesor, 'id'>,
   ): Promise<Asesor> {
-    return this.asesorRepository.create(asesor);
+
+
+
+
+   let p = await this.asesorRepository.create(asesor);
   }
 
   @get('/asesors/count')
