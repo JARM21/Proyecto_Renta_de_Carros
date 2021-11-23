@@ -72,6 +72,7 @@ export class AsesorController {
    
   }
 
+
   @get('/asesors/count')
   @response(200, {
     description: 'Asesor model count',
