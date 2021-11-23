@@ -21,6 +21,9 @@ import {
 import {Asesor} from '../models';
 import {AsesorRepository} from '../repositories';
 import { AutenticacionService } from '../services';
+const fetch = require("node-fetch");
+
+
 
 export class AsesorController {
   constructor(
@@ -57,6 +60,15 @@ export class AsesorController {
    let p = await this.asesorRepository.create(asesor);
 
    //notificación al usuario por correo electronico 
+   let destino = asesor.correo;
+   let asunto = 'Registro en la plataforma';
+   let contenido = `Hola ${asesor.nombres}, su nombre de usuario es: ${asesor.correo} y su contraeña es: ${clave}`;
+
+   fetch(`http://127.0.0.1:5000/envio-correo?correo_destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
+   .then((data:any) =>{
+     console.log(data);
+   })
+   return p;
    
   }
 
