@@ -20,7 +20,7 @@ export class Vehiculo extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
   id_departamento: string;
 
@@ -50,13 +50,13 @@ export class Vehiculo extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
   id_asesor: string;
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
   contacto_encargado: string;
 

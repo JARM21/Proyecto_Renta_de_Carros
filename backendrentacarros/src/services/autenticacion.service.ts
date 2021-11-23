@@ -48,6 +48,7 @@ export class AutenticacionService {
       data:{
         id: asesor.id,
         correo: asesor.correo,
+        
         nombre: asesor.nombres + " " + asesor.apellidos
       }
     },
