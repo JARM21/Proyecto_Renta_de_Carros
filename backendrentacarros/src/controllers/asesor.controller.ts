@@ -111,6 +111,8 @@ export class AsesorController {
     return this.asesorRepository.findById(id, filter);
   }
 
+  
+
   @patch('/asesors/{id}')
   @response(204, {
     description: 'Asesor PATCH success',
