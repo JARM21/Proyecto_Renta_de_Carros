@@ -19,15 +19,27 @@ import {
   response,
   HttpErrors,
 } from '@loopback/rest';
+<<<<<<< HEAD
 import {Asesor, Credenciales} from '../models';
 import {AsesorRepository} from '../repositories';
 import { AutenticacionService } from '../services';
+=======
+import { request } from 'http';
+import { Llaves } from '../config/llaves';
+import {Asesor, Credenciales} from '../models';
+import {AsesorRepository} from '../repositories';
+import { AutenticacionService } from '../services';
+const fetch = require("node-fetch");
+
+
+>>>>>>> 9dfb473cdd777b563392f9972116bfd4e7229c3e
 
 export class AsesorController {
   constructor(
     @repository(AsesorRepository)
     public asesorRepository : AsesorRepository,
     @service(AutenticacionService)
+<<<<<<< HEAD
     public authenticationService : AutenticacionService,
   ) {}
 
@@ -53,6 +65,36 @@ export class AsesorController {
     } else {
       throw new HttpErrors[401]("Datos invalidos");
     }
+=======
+    public servicioAutenticacion : AutenticacionService
+  ) {}
+
+  @post("/identificarAsesor", {
+    responses:{
+      '200':{
+        description: "Identificación de usuarios"
+      }
+    }
+  })
+  async identificarAsesor(
+    @requestBody() credenciales: Credenciales
+  ){
+    let p = await this.servicioAutenticacion.IdentificarAsesor(credenciales.usuario, credenciales.clave);
+    if(p){
+      let token = this.servicioAutenticacion.GenerarTokenJWT(p);
+      return{
+        datos: {
+          nombre: p.nombres,
+          correo: p.correo,
+          id: p.id
+        },
+        tk: token
+      }
+    }else{
+      throw new HttpErrors[401]("Datos invalidos");
+    }
+    
+>>>>>>> 9dfb473cdd777b563392f9972116bfd4e7229c3e
   }
 
   @post('/asesors')
@@ -73,8 +115,27 @@ export class AsesorController {
     })
     asesor: Omit<Asesor, 'id'>,
   ): Promise<Asesor> {
-    return this.asesorRepository.create(asesor);
+    let clave = this.servicioAutenticacion.GenerarClave();
+
+    let claveCifrada = this.servicioAutenticacion.CifrarClave(clave);
+
+    asesor.clave = claveCifrada;
+
+   let p = await this.asesorRepository.create(asesor);
+
+   //notificación al usuario por correo electronico 
+   let destino = asesor.correo;
+   let asunto = 'Registro en la plataforma';
+   let contenido = `Hola ${asesor.nombres}, su nombre de usuario es: ${asesor.correo} y su contraeña es: ${clave}`;
+
+   fetch(`${Llaves.urlServicioNotificaciones}/envio-correo?correo_destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
+   .then((data:any) =>{
+     console.log(data);
+   })
+   return p;
+   
   }
+
 
   @get('/asesors/count')
   @response(200, {
