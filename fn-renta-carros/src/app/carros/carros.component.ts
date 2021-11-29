@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Carro } from '../interfaces/carro';
+import { CARROS } from './mock-carros';
 
 @Component({
   selector: 'app-carros',
@@ -8,17 +9,29 @@ import { Carro } from '../interfaces/carro';
 })
 export class CarrosComponent implements OnInit {
 
-  carro: Carro = {
-    id: 1,
-    modelo: "2021",
-    marca: "Chevrolet",
-    calificacion: 4.3,
-    precio: 10000
-  };
+  carrosList = CARROS;
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  buildArr(theArr: Carro[]): Carro[][]{
+
+    var arrOfarr = [];
+    for(var i = 0; i < theArr.length ; i+=4) {
+        var row = [];
+
+        for(var x = 0; x < 4; x++) {
+          var value = theArr[i + x];
+            if (!value) {
+                break;
+            }
+            row.push(value);
+        }
+        arrOfarr.push(row);
+    }
+     return arrOfarr;
+}
 
 }

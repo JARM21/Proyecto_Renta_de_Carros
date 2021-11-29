@@ -1,7 +1,20 @@
-<h2>{{carro.marca}} {{ carro.modelo }} Details</h2>
-<ul>
-    <li>ID: {{carro.id}}</li>
-    <li>Modelo: {{carro.modelo}}</li>
-    <li>Marca: {{carro.marca}}</li>
-    <li>Calificación: {{carro.calificacion}}</li>
-</ul>
+<div class="section">
+    <div class="columns" *ngFor="let carros of buildArr(carrosList)">
+        <div class="column is-3" *ngFor="let carro of carros">   
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    {{carro.modelo}} {{carro.marca}}
+                </div>
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Detalle</a>
+                    <a href="#" class="card-footer-item">Alquilar</a>
+                </footer>        
+            </div>
+        </div> 
+    </div>
+</div>
