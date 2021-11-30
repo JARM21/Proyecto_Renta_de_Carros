@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" routerLink="/home">
-      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      <img src="/assets/logo.PNG" width="112" height="28">
     </a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -13,6 +13,10 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
+      
+    </div>
+
+    <div class="navbar-end">
       <a class="navbar-item" routerLink="/home">
         Home
       </a>
@@ -23,15 +27,12 @@
       <a class="navbar-item" routerLink="/carros">
         Carros
       </a>      
-    </div>
-
-    <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
+          <a class="button is-primary" routerLink="/signup">
             <strong>Sign up</strong>
           </a>
-          <a class="button is-light">
+          <a class="button is-light" routerLink="/login">
             Log in
           </a>
         </div>
@@ -41,6 +42,10 @@
 </nav>
 
 <section class="section">
-  <h1 class="title">{{title}}</h1>
   <router-outlet></router-outlet>
 </section>
+
+<footer class="footer">
+  <p>Footer de la pagina (En construccion)</p>
+  <p class="has-text-centered">Todos los derechos reservados | 2021</p>
+</footer>

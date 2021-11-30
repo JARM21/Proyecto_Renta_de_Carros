@@ -6,7 +6,7 @@ export const CARROS: Carro[] = [
         modelo: "2021",
         marca: "Chevrolet",
         calificacion: 4.3,
-        precio: 10000
+        precio: 12000
     },
     {
         id: 2,
@@ -20,27 +20,27 @@ export const CARROS: Carro[] = [
         modelo: "2020",
         marca: "Renault",
         calificacion: 4.3,
-        precio: 10000
+        precio: 16000
     },
     {
-        id: 1,
+        id: 4,
         modelo: "2021",
         marca: "Chevrolet",
         calificacion: 4.3,
-        precio: 10000
+        precio: 13000
     },
     {
-        id: 2,
+        id: 5,
         modelo: "2022",
         marca: "Corolla",
         calificacion: 4.3,
-        precio: 10000
+        precio: 30000
     },
     {
-        id: 3,
+        id: 6,
         modelo: "2020",
         marca: "Renault",
         calificacion: 4.3,
-        precio: 10000
+        precio: 11500
     }
 ];

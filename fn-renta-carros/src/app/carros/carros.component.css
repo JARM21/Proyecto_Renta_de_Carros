@@ -1,0 +1,15 @@
+
+figcaption {
+    background-color: #222;
+    width: 150px;
+    border-radius: 6px;
+    color: #fff;
+    font: italic smaller sans-serif;
+    font-size: 1rem;
+    padding: 5px;
+    margin-top: -60px;
+    text-align: center;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
