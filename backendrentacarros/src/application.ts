@@ -1,5 +1,5 @@
 import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import {ApplicationConfig, Context} from '@loopback/core';
 import {
   RestExplorerBindings,
   RestExplorerComponent,
@@ -9,6 +9,10 @@ import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
+import { AuthenticationComponent, registerAuthenticationStrategy } from '@loopback/authentication';
+import { EstrategiaAsesor} from './strategies/admin.strategy';
+
+
 
 export {ApplicationConfig};
 
@@ -39,6 +43,12 @@ export class App extends BootMixin(
         extensions: ['.controller.js'],
         nested: true,
       },
+      
     };
+  
   }
 }
+
+  
+  
+

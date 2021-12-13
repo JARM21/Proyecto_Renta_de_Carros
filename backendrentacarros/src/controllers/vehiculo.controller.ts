@@ -1,3 +1,4 @@
+import { authenticate } from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -17,7 +18,7 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Vehiculo} from '../models';
+import {Asesor, Vehiculo} from '../models';
 import {VehiculoRepository} from '../repositories';
 
 export class VehiculoController {
@@ -25,6 +26,8 @@ export class VehiculoController {
     @repository(VehiculoRepository)
     public vehiculoRepository : VehiculoRepository,
   ) {}
+
+  @authenticate("asesor")
 
   @post('/vehiculos')
   @response(200, {

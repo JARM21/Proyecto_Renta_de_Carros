@@ -5,3 +5,4 @@ export * from './administrador.model';
 export * from './asesor.model';
 export * from './vehiculo.model';
 export * from './departamento.model';
+export * from './credenciales.model';
